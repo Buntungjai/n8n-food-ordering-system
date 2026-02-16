@@ -7,3 +7,15 @@
 <p align="center">
   <img src="gifFile.gif" alt="n8n Automation Showcase" width="1000">
 </p>
+
+Project Overview: ระบบสั่งอาหารอัตโนมัติที่ช่วยลดขั้นตอนการคีย์ข้อมูลด้วยมือ (Manual)
+
+Tech Stack:
+
+Frontend: HTML/JS (Mobile Friendly)
+
+Backend/Automation: n8n
+
+Database: Google Sheets API
+
+Infrastructure: Raspberry Pi 4, Docker, Cloudflare Tunnel
