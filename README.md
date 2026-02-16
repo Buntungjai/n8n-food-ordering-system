@@ -5,5 +5,5 @@
 - **Database:** บันทึกข้อมูลลง Google Sheets แบบเรียลไทม์
 
 <p align="center">
-  <img src="gifFile.gif" alt="n8n Automation Showcase" width="800">
+  <img src="gifFile.gif" alt="n8n Automation Showcase" width="1000">
 </p>
