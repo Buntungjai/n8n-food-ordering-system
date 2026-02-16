@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - สั่งอาหาร</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50">
+    <div class="max-w-md mx-auto min-h-screen shadow-lg bg-white p-6">
+        <header class="mb-8 border-b pb-4">
+            <h1 class="text-3xl font-extrabold text-orange-600">Delicious Pi 🍕</h1>
+            <p id="table-display" class="text-gray-500 font-medium">โต๊ะ: กำลังโหลด...</p>
+        </header>
+
+        <div class="space-y-4" id="menu-list">
+            <div class="flex justify-between items-center p-4 bg-white border rounded-2xl shadow-sm">
+                <div>
+                    <h3 class="font-bold text-lg">กะเพราเนื้อสับ</h3>
+                    <p class="text-sm text-gray-400">เผ็ดระดับ 3</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-orange-500 mb-2">75.-</p>
+                    <button onclick="order('กะเพราเนื้อสับ', 75)" class="bg-orange-500 text-white px-6 py-2 rounded-xl active:scale-95 transition">สั่งเลย</button>
+                </div>
+            </div>
+            <div class="flex justify-between items-center p-4 bg-white border rounded-2xl shadow-sm">
+                <div>
+                    <h3 class="font-bold text-lg">ชาไทยเย็น</h3>
+                    <p class="text-sm text-gray-400">หวานมันพอดี</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-orange-500 mb-2">45.-</p>
+                    <button onclick="order('ชาไทยเย็น', 45)" class="bg-orange-500 text-white px-6 py-2 rounded-xl active:scale-95 transition">สั่งเลย</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 hidden bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl">
+            ส่งออเดอร์แล้ว! 🚀
+        </div>
+    </div>
+
+    <script>
+        // 1. ดึงข้อมูลโต๊ะจาก URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const table = urlParams.get('table') || "A1"; // ถ้าไม่มีเลขจะใช้ A1 เป็นค่าเริ่มต้น
+        document.getElementById('table-display').innerText = "โต๊ะ: " + table;
+
+        // 2. ฟังก์ชันส่งออเดอร์ไป n8n
+        async function order(menuName, price) {
+            //const WEBHOOK_URL = 'https://exceptions-newman-renew-citizen.trycloudflare.com'; // เช็ค IP อีกทีนะ
+            // แก้จากเดิม
+            const WEBHOOK_URL = 'https://met-crafts-cad-stunning.trycloudflare.com/webhook/order';
+            
+            //http://10.0.30.110:5678/webhook/order
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        table: table,
+                        menu: menuName,
+                        price: price,
+                        orderTime: new Date().toLocaleTimeString()
+                    })
+                });
+                
+                // โชว์ Notification สวยๆ
+                const toast = document.getElementById('toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2000);
+            } catch (err) {
+                alert('ส่งออเดอร์ไม่สำเร็จ ตรวจสอบ WiFi ร้าน!');
+            }
+        }
+    </script>
+</body>
+</html>
