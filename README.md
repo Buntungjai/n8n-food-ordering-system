@@ -12,10 +12,10 @@ Project Overview: ระบบสั่งอาหารอัตโนมั�
 
 Tech Stack:
 
-Frontend: HTML/JS (Mobile Friendly)
+-  Frontend: HTML/JS (Mobile Friendly)
 
-Backend/Automation: n8n
+-  Backend/Automation: n8n
 
-Database: Google Sheets API
+-  Database: Google Sheets API
 
-Infrastructure: Raspberry Pi 4, Docker, Cloudflare Tunnel
+-  Infrastructure: Raspberry Pi 4, Docker, Cloudflare Tunnel
